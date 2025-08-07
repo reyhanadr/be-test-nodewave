@@ -2,7 +2,6 @@ import { response_not_found, response_success } from "$utils/response.utils";
 import { Request, Response, Router } from "express";
 import RoutesRegistry from "./registry";
 
-
 const router = Router();
 
 router.get("/", (req: Request, res: Response) => {
@@ -20,7 +19,8 @@ router.get("/ping", (req: Request, res: Response) => {
 
 
 router.use("/example", RoutesRegistry.ExampleRoutes)
-
+router.use('/api/auth', RoutesRegistry.AuthRoutes);
+router.use('/api/product', RoutesRegistry.ProductRoutes);
 
 router.all("*", (req: Request, res: Response) => {
   return response_not_found(res);

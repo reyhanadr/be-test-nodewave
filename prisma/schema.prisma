@@ -10,4 +10,41 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Declare schemas here
+enum Roles {
+  ADMIN
+  USER
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  email        String    @unique
+  fullName     String?
+  password     String // Hashed password
+  refreshToken String? // For JWT refresh token
+  lastLogin    DateTime?
+  role         Roles     @default(USER)
+  sessions     Session[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  name        String
+  description String?
+  price       Float
+  stock       Int
+  category    String
+}

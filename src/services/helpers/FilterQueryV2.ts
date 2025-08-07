@@ -1,7 +1,7 @@
 import { FilteringQueryV2, RangedFilter } from "$entities/Query";
 
 
-function buildSearchQuery(searchFilters:Record<string, any | any[] | null>):any[]{
+export function buildSearchQuery(searchFilters:Record<string, any | any[] | null>):any[]{
   let whereClauseAndResult:any = [];
   let orQuerySearchArray:any[] = [];
   
@@ -50,7 +50,7 @@ function buildSearchQuery(searchFilters:Record<string, any | any[] | null>):any[
   return whereClauseAndResult;
 }
 
-function buildWhereQuery(filters:Record<string, any | any[] | null>):any[]{
+export function buildWhereQuery(filters:Record<string, any | any[] | null>):any[]{
   let whereClauseAndResult:any = [];
   for (const key in filters) {
     const valueToFilter = filters[key];
@@ -127,7 +127,7 @@ function parseAndCheckRangeFilter(range: RangedFilter): any {
   return range
 }
 
-function buildRangedFilter(rangedFilters:RangedFilter[]):any[]{
+export function buildRangedFilter(rangedFilters:RangedFilter[]):any[]{
   const whereClauseAndResult:any[] = [];
 
   rangedFilters.forEach((range: RangedFilter) => {

@@ -1,7 +1,8 @@
 import createRestServer from './rest';
 
-const server = {
+
+export default {
   restServer: createRestServer
 }
 
-export default server
+// export default {server, DatabaseConnection }
